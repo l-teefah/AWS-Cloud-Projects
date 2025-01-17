@@ -12,6 +12,7 @@ This repository contains:
 
 **Repository Contents**
 **`mygithubcloning.sh`**: A shell script containing all the commands required for deployment.
+
 **`README.md`**: Documentation of the deployment process.
 
 ---
