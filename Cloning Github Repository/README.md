@@ -11,6 +11,7 @@ This repository contains:
 ---
 
 **Repository Contents**
+
 **`mygithubcloning.sh`**: A shell script containing all the commands required for deployment.
 
 **`README.md`**: Documentation of the deployment process.
@@ -55,8 +56,11 @@ Below is a step-by-step guide to deploying a website on an AWS EC2 instance:
 ---
 
 **Prerequisites**
+
 **AWS Account**: To create and configure an EC2 instance.
+
 **Git**: To clone the repository.
+
 **Basic Linux Knowledge**: To execute shell commands.
 
 ---
