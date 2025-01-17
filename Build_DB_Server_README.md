@@ -103,7 +103,7 @@ This guide walks through setting up and interacting with a relational database s
    - Before using the PEM file, ensure it has the correct permissions:
    - Connect via SSH through `Terminal` or `Putty`:
    
-    ``bash
+    ```bash
      cd ~/Downloads
      ```
    
@@ -139,6 +139,7 @@ This guide walks through setting up and interacting with a relational database s
      ```bash
      ssh -i my_key_pair.pem ec2-user@<public-ip-address>
      ```
+     
    - Replace `<public-ip-address>` with the instance's public IP.
 
 8. **Example SSH Command:**
@@ -176,6 +177,7 @@ This guide walks through setting up and interacting with a relational database s
    ```
 
 2. **Create `TRAINING_RECORDS` Table:**
+   
    ```sql
    CREATE TABLE TRAINING_RECORDS (
        Employee_ID INT,
