@@ -10,7 +10,7 @@ This guide will help you launch a static website on Amazon S3 using both the AWS
 ---
 
 ## Create an Index File
-Create a simple `index.html` file locally to act as the main page of your website, copy the code below into a text editor and save as html file or download here [Download index.html](./index.html). For example:
+Create a simple `index.html` file locally to act as the main page of your website, copy the code below into a text editor and save as html file or download here [Download index.html](Resources/index.html). For example: 
 
 ```html
 <!DOCTYPE html>
