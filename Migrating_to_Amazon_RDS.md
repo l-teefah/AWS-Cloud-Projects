@@ -4,7 +4,6 @@
 This guide provides a comprehensive process to create necessary resources for deploying and using an Amazon RDS MariaDB instance. It includes instructions for setting up the required infrastructure, migrating data from a MariaDB database on an EC2 instance, and monitoring the database.
 
 ## Objectives
-By the end of this guide, you will:
 
 1. Create and configure AWS resources for Amazon RDS MariaDB.
 2. Deploy an Amazon RDS MariaDB instance.
