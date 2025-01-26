@@ -205,7 +205,7 @@ This security group is attached to the Lambda function.
      ('Tommy Merlyn', 'Present', CURDATE()),
      ('Moira Queen', 'Absent', CURDATE()),
      ('Robert Queen', 'Present', CURDATE()),
-     ('Walter Steele', 'Absent', CURDATE
+     ('Walter Steele', 'Absent', CURDATE());
      ```
 
 
