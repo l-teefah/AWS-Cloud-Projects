@@ -2,7 +2,7 @@
 # README: Understanding and Deploying the Lateefah CloudFormation Template
 
 ## Overview
-AWS CloudFormation simplifies the process of defining and provisioning infrastructure (IaaC) by using templates written in JSON or YAML. This README provides a detailed explanation of how the CloudFormation template works and step-by-step instructions for uploading and deploying the [file template](Lateefah CloudFormation Template.yaml) using two methods: the AWS Management Console and an SSH terminal.
+AWS CloudFormation simplifies the process of defining and provisioning infrastructure (IaaC) by using templates written in JSON or YAML. This guide provides a detailed explanation of how the CloudFormation template works and step-by-step instructions for uploading and deploying the [file template](Lateefah CloudFormation Template.yaml) using two methods: the AWS Management Console and an SSH terminal.
 
 ---
 
