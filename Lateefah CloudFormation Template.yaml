@@ -1,0 +1,149 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Practice template
+
+# VPC, IGW, private subnet, security group, and EC2 instance
+
+Parameters:
+
+  AmazonLinuxAMIID:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+
+  MyVpcCidr:
+    Type: String
+    Default: 10.0.0.0/16
+
+  PrivateSubnetCidr:
+    Type: String
+    Default: 10.0.1.0/24
+
+
+Resources:
+
+###########
+# VPC with Internet Gateway
+###########
+
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref MyVpcCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: MyVPC
+    DeletionPolicy: Retain
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyIGW
+    DeletionPolicy: Retain
+
+  AttachInternetGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref MyVPC
+    DeletionPolicy: Retain
+
+###########
+# Private Route Table
+###########
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyVPC
+      Tags:
+        - Key: Name
+          Value: PrivateRouteTable
+    DeletionPolicy: Retain
+
+###########
+# Private Subnet
+###########
+
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: !Ref PrivateSubnetCidr
+      MapPublicIpOnLaunch: false
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs
+          Ref: AWS::Region
+      Tags:
+        - Key: Name
+          Value: PrivateSubnet
+    DeletionPolicy: Retain
+
+  PrivateRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnet
+    DeletionPolicy: Retain
+
+###########
+# App Security Group
+###########
+
+  AppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: SSHAccess
+      GroupDescription: Allow SSH access
+      VpcId: !Ref MyVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: SSHSecurityGroup
+    DeletionPolicy: Retain
+
+###########
+# EC2 Instance
+###########
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmazonLinuxAMIID
+      InstanceType: t3.micro
+      SecurityGroupIds:
+        - !Ref AppSecurityGroup
+      SubnetId: !Ref PrivateSubnet
+      Tags:
+        - Key: Name
+          Value: MyEC2Instance
+    DeletionPolicy: Retain
+
+###########
+# Outputs
+###########
+
+Outputs:
+
+  VPCId:
+    Description: "VPC ID"
+    Value: !Ref MyVPC
+
+  SubnetId:
+    Description: "Private Subnet ID"
+    Value: !Ref PrivateSubnet
+
+  SecurityGroupId:
+    Description: "Security Group ID"
+    Value: !Ref AppSecurityGroup
+
+  InstanceId:
+    Description: "EC2 Instance ID"
+    Value: !Ref MyEC2Instance
