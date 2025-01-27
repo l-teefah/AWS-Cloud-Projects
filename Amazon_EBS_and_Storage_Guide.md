@@ -25,7 +25,7 @@ This guide combines instructions for managing Amazon Elastic Block Store (Amazon
 ### Task 1: Creating and Configuring an EBS Volume
 #### Steps
 1. Open the EC2 Management Console.
-2. Navigate to **Instances** and launch a new EC2 instance with a key pair file; I will be using [this key pair file](my_key_pair.pem). Make sure your EC2 instance's security group allows `HTTP` (port 80), `HTTPS` (port 443), and `SSH` (port 22) access access through its inbound rule. 
+2. Navigate to **Instances** and launch a new EC2 instance with a key pair file; I will be using [this key pair file](Resources/my_key_pair.pem). Make sure your EC2 instance's security group allows `HTTP` (port 80), `HTTPS` (port 443), and `SSH` (port 22) access access through its inbound rule. 
 3. Note the **Availability Zone** of your instance (e.g., `us-west-2a`).
 4. Navigate to **Volumes** under **Elastic Block Store** and click **Create Volume**.
    - Volume Type: General Purpose SSD (gp2).
