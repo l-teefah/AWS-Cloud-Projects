@@ -90,10 +90,10 @@ A CloudFormation template is divided into several sections:
 
 ### Move Template from PC to EC2 Instance
 
-1. **Using Local File [CloudFormation template](Lateefah CloudFormation Template.yaml):**
+1. **Using Local File [CloudFormation template](CloudFormation Template/Lateefah CloudFormation Template.yaml):**
    - Locate the file in your local directory: e.g.,`<path directory>/Lateefah CloudFormation Template.yaml`.
    
-   - Launch a new EC2 instance with a key pair file; I will be using [this key pair file](my_key_pair.pem). Make sure your EC2 instance's security group allows `SSH` (port 22) access access through its inbound rule.
+   - Launch a new EC2 instance with a key pair file; I will be using [this key pair file](Resources/my_key_pair.pem). Make sure your EC2 instance's security group allows `SSH` (port 22) access access through its inbound rule.
    
    - Extract the file from your pc & Transfer it to the EC2 instance using `scp` in your local SSH Client (Putty or Terminal):
    
