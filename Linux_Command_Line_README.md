@@ -1,4 +1,4 @@
-# Linux Command Line Lab - README
+# **Linux Command Line Lab**
 
 ## Overview
 This guide outlines the steps to connect to a Linux server via SSH, run system and session commands, work with commands like `tee`, `sort`, `cut`, and `sed`, edit files using Vim and nano, and optimize workflows using pipes and bash history. 
