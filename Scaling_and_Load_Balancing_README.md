@@ -7,7 +7,6 @@ This guide explains how to set up an Auto Scaling architecture using Elastic Loa
 ---
 
 ## **Objectives**
-After completing this guide, you will be able to:
 
 1. Create an AMI from an EC2 instance.
 
@@ -194,13 +193,11 @@ Ensure you have access to the AWS Management Console and permission to create EC
 
 ---
 
-**Auto Scaling will increase the number of instance that already exist in your AWS console after Task 6. There is an optional task to execute on one of the extra instances in the next section.**
-
----
-
 ## **Optional Task: Creating an AMI using AWS CLI**
 1. Use **EC2 Instance Connect** to connect to one of the instances created by the Auto Scaling group.
+   
 2. Configure AWS CLI credentials with `aws configure`, refer to Task 5 in [Install & Configure AWS CLI](Install_Configure_AWS_CLI_README.md).
+   
 3. Use the `aws ec2 create-image` command below to create an AMI from the instance.
      
      ```bash
@@ -209,6 +206,7 @@ Ensure you have access to the AWS Management Console and permission to create EC
      --name "CLI-created-AMI" 
      --description "Created using AWS CLI"
       ```
+
 ---
 
 ## **Potential Issues and Preventative Measures**
@@ -221,9 +219,5 @@ Ensure all resources (VPC, subnets, security groups, etc.) are created before st
 
 **Missing AMI**: The AMI is created explicitly in Task 1. Ensuring the instance is running and properly configured before creating the AMI will prevent issues.
 Resource Dependencies:
-
----
-
-For additional challenges, try creating an AMI using AWS CLI commands.
 
 --- 
