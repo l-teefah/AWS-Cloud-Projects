@@ -1,9 +1,9 @@
 
 # **AWS User, Groups and Directory Guide Instructions**
 
-This README provides a comprehensive set of step-by-step guides designed to help perform essential tasks on an AWS environment from scratch. Each guide walks through connecting to an EC2 instance, managing users and groups, working with files and directories, monitoring processes, and automating repetitive tasks using cron jobs.
+This guide provides a comprehensive set of step-by-step guides designed to help perform essential tasks on an AWS environment from scratch. Each guide walks through connecting to an EC2 instance, managing users and groups, working with files and directories, monitoring processes, and automating repetitive tasks using cron jobs.
 
-Whether you're new to AWS or looking to solidify your skills, these instructions provide practical, hands-on experience with core AWS concepts and Linux commands. You will learn how to:
+**Objectives**
 
 - Create and manage users and groups.
 - Organize and restructure directories and files.
@@ -88,7 +88,7 @@ Whether you're new to AWS or looking to solidify your skills, these instructions
 | Zara       | Ali         | zali         | Customer Support    | P@ssword2025      | Personell |
 
 
-1. Create users using `useradd` and set their passwords using `passwd`. Replace `<username>` & `<password>` with appropriate User ID and password from the table above. 
+1. Create each users using `useradd` and set their passwords using `passwd`. Replace `<username>` & `<password>` with appropriate User ID and password from the table above. 
 
    ```bash
    sudo useradd <username>
@@ -326,7 +326,7 @@ Whether you're new to AWS or looking to solidify your skills, these instructions
 
 ---
 
-## Additional Resources
+## **Additional Resources**
 
 - [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
 
