@@ -130,7 +130,7 @@ Covers essential database operations such as creating, altering, and dropping da
 
 5. **Import Data:**
 
-   - Use an SQL file `globe.sql` to bulk import data and view:
+   - Use this SQL file [`globe.sql`](globe.sql) to bulk import data and view:
 
      ```bash
      scp -i <your-key-pair.pem> <~/globe.sql> ec2-user@<public-ip> #upload sql file to EC2 instance
