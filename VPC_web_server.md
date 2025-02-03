@@ -228,7 +228,7 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
 
 6. **Verify the Web App**:
 
-   - Open a browser and enter the **Public IP** of your instance. You should see the interactive web page.
+   - Open a browser and enter the Public IP of your instance OR Go to EC2 instance in the AWS console and click on the public IP address. You should see the interactive web page.
 
    - Click the button to fetch and display a greeting.
 
