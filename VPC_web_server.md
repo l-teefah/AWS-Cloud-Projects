@@ -168,7 +168,7 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      EOF
      ```
 
-**Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate `end of file`.**
+**Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate end of file.**
 
   - Confirm that `app.js` was created 
   
@@ -209,7 +209,7 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      EOF
      ```
      
-**Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate `end of file`.**
+**Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate end of file.**
 
      - Confirm that `index.html` was created 
   
