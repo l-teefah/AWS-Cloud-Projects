@@ -9,6 +9,7 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 - [AWS Scenario Questions](Assessment Scenario Certification.pdf)
 - [AWS SysOps Quiz](AWS SysOps Q&A Guide.docx)
 
+
 ### **EC2 and Compute Resources**
 - [Basics of how EC2 instances work](Introduction_to_Amazon_EC2_README.md)
 - [Install & configure AWS CLI. Create an EC2 Instance using AWS CLI](Install_Configure_AWS_CLI_README.md)
