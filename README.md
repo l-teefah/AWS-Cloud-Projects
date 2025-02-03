@@ -66,12 +66,9 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
    ```
    
 2. **Navigate to the relevant guide:**  
-   Open any `.md` file in a markdown viewer or editor to follow the instructions.
+   Open any of the file in a markdown viewer to practice. Files that used additional resources are enclosed in the same folder with the resources.
    
-3. **Experiment with AWS services:**  
-   Follow the step-by-step instructions to set up AWS resources and gain hands-on experience.
-   
-4. **Contribute or Report Issues:**  
+3. **Contribute or Report Issues:**  
    Feel free to submit pull requests or open issues for improvements and discussions.
 
 ---
