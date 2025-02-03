@@ -5,9 +5,9 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 ## Table of Contents
 
 ### **Notes & Quizzes**
-- [AWS Notes](General Notes.pdf)
-- [AWS Scenario Questions](Assessment Scenario Certification.pdf)
-- [AWS SysOps Quiz](AWS SysOps Q&A Guide.docx)
+- [AWS Notes](General_Notes.pdf)
+- [AWS Scenario Questions](Assessment_Scenario_Certification.pdf)
+- [AWS SysOps Quiz](AWS_SysOps_Q&A_Guide.docx)
 
 
 ### **EC2 and Compute Resources**
