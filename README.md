@@ -49,7 +49,7 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 
 ### **Linux and DevOps Essentials**
 - [Linux Command Line, Editing Files in Vim & nano, Working with Commands](Linux_Command_Line_README.md)
-- [Creating directories, users and groups, transferring files, adding permissions, and managing cron jobs](AWS_User_Groups_Directory Guide.md)
+- [Creating directories, users and groups, transferring files, adding permissions, and managing cron jobs](AWS_User_Groups_Directory_Guide.md)
 - [Cloning Github Repository](README.MD)
 
 ### **Networking and Troubleshooting**
