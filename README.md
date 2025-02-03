@@ -74,7 +74,7 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 ---
 
 ## License
-This repository is open-source and provided for educational purposes. Ensure you follow AWS best practices when implementing solutions.
+This repository is open-source and provided for educational purposes. Ensure you follow AWS best practices when implementing solutions and remember to delete resources to avoid charges from AWS.
 
 ---
 
