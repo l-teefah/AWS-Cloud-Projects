@@ -151,118 +151,115 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      ```
      
    - Generate app-specific password:
-**For Gmail:**
+     
+   1. **For Gmail:**
 
-Enable 2-Step Verification in Google Account
+      - Enable 2-Step Verification in Google Account
+      - Generate App Password: Google Account → Security → App passwords
+      - Update the Gmail configuration in `Email providers configurations` in the code below by replacing `your-email@gmail.com` with your gmail address and `your-gmail-app-password` with the password generated earlier.
+        
+   2. **For Yahoo:**
 
-Generate App Password: Google Account → Security → App passwords
+      - Enable two-step verification
+      - Generate App Password: Account Security → Generate app password
+      - Update the Yahoo configuration in `Email providers configurations` in the code below by replacing `your-email@yahoo.com` with your yahoo mail and `your-yahoo-app-password` with the password generated. 
 
-Update the Gmail configuration in emailProviders.gmail
-
-**For Yahoo:**
-
-Enable two-step verification
-
-Generate App Password: Account Security → Generate app password
-
-Update the Yahoo configuration in emailProviders.yahoo
-
-   - Select your provider and change `SELECTED_PROVIDER` in the code below to 'yahoo' if it is not gmail
+   - Select your provider by changing `SELECTED_PROVIDER` in the code below to 'yahoo' if it is not gmail. 
      
    - Create a server script:
 
-     ```bash
-     cat << 'EOF' > app.js¨
-     const express = require('express');
-     const path = require('path');
-     const nodemailer = require('nodemailer');
-     const app = express();
-     const port = 50;
+```bash
+cat << 'EOF' > app.js¨
+const express = require('express');
+const path = require('path');
+const nodemailer = require('nodemailer');
+const app = express();
+const port = 3000;
 
-     // Email provider configurations
-     const emailProviders = {
-         gmail: {
-             service: 'gmail',
-             host: 'smtp.gmail.com',
-             port: 587,
-             secure: false,
-             requiresAppPassword: true,
-             auth: {
-                 user: 'your-email@gmail.com',
-                 pass: 'your-gmail-app-password'
-             }
-         },
-         yahoo: {
-             service: 'yahoo',
-             host: 'smtp.mail.yahoo.com',
-             port: 465,
-             secure: true,
-             requiresAppPassword: true,
-             auth: {
-                 user: 'your-email@yahoo.com',
-                 pass: 'your-yahoo-app-password'
-             }
-         }
-     };
+// Email provider configurations
+const emailProviders = {
+    gmail: {
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        requiresAppPassword: true,
+        auth: {
+            user: 'your-email@gmail.com',
+            pass: 'your-gmail-app-password'
+        }
+    },
+    yahoo: {
+        service: 'yahoo',
+        host: 'smtp.mail.yahoo.com',
+        port: 465,
+        secure: true,
+        requiresAppPassword: true,
+        auth: {
+            user: 'your-email@yahoo.com',
+            pass: 'your-yahoo-app-password'
+        }
+    }
+};
 
-     // Select your email provider here: 'gmail' or 'yahoo'
-     const SELECTED_PROVIDER = 'gmail';  // Change this to 'yahoo' for Yahoo Mail
+// Select your email provider here: 'gmail' or 'yahoo'
+const SELECTED_PROVIDER = 'gmail';  // Change this to 'yahoo' for Yahoo Mail
 
-     // Create email configuration
-     const getEmailConfig = (provider) => {
-         const config = emailProviders[provider];
-         if (!config) {
-             throw new Error(`Unsupported email provider: ${provider}`);
-         }
-         return {
-             service: config.service,
-             host: config.host,
-             port: config.port,
-             secure: config.secure,
-             auth: config.auth,
-             debug: false,
-             logger: true
-         };
-     };
+// Create email configuration
+const getEmailConfig = (provider) => {
+    const config = emailProviders[provider];
+    if (!config) {
+        throw new Error(`Unsupported email provider: ${provider}`);
+    }
+    return {
+        service: config.service,
+        host: config.host,
+        port: config.port,
+        secure: config.secure,
+        auth: config.auth,
+        debug: false,
+        logger: true
+    };
+};
 
-     // Validate email configuration
-     const validateEmailConfig = (config) => {
-         const { auth } = config;
-         if (!auth.user || !auth.pass) {
-             throw new Error('Email configuration is incomplete. Please check your email and password settings.');
-         }
-         return true;
-     };
+// Validate email configuration
+const validateEmailConfig = (config) => {
+    const { auth } = config;
+    if (!auth.user || !auth.pass) {
+        throw new Error('Email configuration is incomplete. Please check your email and password settings.');
+    }
+    return true;
+};
 
-     // Initialize email transporter
-     let transporter;
-     try {
-         const emailConfig = getEmailConfig(SELECTED_PROVIDER);
-         validateEmailConfig(emailConfig);
-         transporter = nodemailer.createTransport(emailConfig);
-     } catch (error) {
-         console.error('Email configuration error:', error.message);
-         process.exit(1);
-     }
+// Initialize email transporter
+let transporter;
+try {
+    const emailConfig = getEmailConfig(SELECTED_PROVIDER);
+    validateEmailConfig(emailConfig);
+    transporter = nodemailer.createTransport(emailConfig);
+} catch (error) {
+    console.error('Email configuration error:', error.message);
+    process.exit(1);
+}
 
-     app.use(express.static('public'));
-     app.use(express.json());
+app.use(express.static('public'));
+app.use(express.json());
 
-     // Test email configuration on startup
-     transporter.verify((error, success) => {
-         if (error) {
-             console.error('Email configuration verification failed:', error);
-         } else {
-             console.log('Email server is ready to send messages');
-         }
-     });
+// Test email configuration on startup
+transporter.verify((error, success) => {
+    if (error) {
+        console.error('Email configuration verification failed:', error);
+    } else {
+        console.log('Email server is ready to send messages');
+    }
+});
 
-     app.get('/', (req, res) => {
-         res.sendFile(path.join(__dirname, 'public', 'index.html'));
-     });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-     app.post('/submit', async (req, res) => {
-         const { name, email } = req.body;
+app.post('/submit', async (req, res) => {
+    const { name, email } = req.body;
     
     // Email content
     const mailOptions = {
@@ -289,7 +286,7 @@ Update the Yahoo configuration in emailProviders.yahoo
             html: `
                 <h3>Thank you for reaching out, ${name}!</h3>
                 <p>We have received your submission and will get back to you shortly.</p>
-                <p>Best regards!!</p>
+                <p>Best regards,<br>Your Team</p>
             `
         };
         
@@ -306,23 +303,23 @@ Update the Yahoo configuration in emailProviders.yahoo
             success: false 
         });
     }
-     });
+});
 
-     // Error handling middleware
-     app.use((error, req, res, next) => {
-         console.error('Server error:', error);
-         res.status(500).json({
-             message: 'An unexpected error occurred',
-             success: false
-         });
-     });
+// Error handling middleware
+app.use((error, req, res, next) => {
+    console.error('Server error:', error);
+    res.status(500).json({
+        message: 'An unexpected error occurred',
+        success: false
+    });
+});
 
-     app.listen(port, () => {
-         console.log(`Server running at http://localhost:${port}`);
-         console.log(`Using email provider: ${SELECTED_PROVIDER}`);
-     });
-     EOF
-     ```
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Using email provider: ${SELECTED_PROVIDER}`);
+});
+EOF
+```
 
 **Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate end of file.**
 
