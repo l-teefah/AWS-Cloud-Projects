@@ -115,8 +115,9 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      chmod 400 <key-pair.pem>
      ssh -i <key-pair.pem> ec2-user@<public-ip>
      ```
-- Replace `~/Downloads` with the key pair file location assuming it is not in the Downloads folder.
-- Replace `<key-pair.pem>` and `<public-ip>` with the key pair file name and EC2 instance public IP address.
+     
+   - Replace `~/Downloads` with the key pair file location assuming it is not in the Downloads folder.
+   - Replace `<key-pair.pem>` and `<public-ip>` with the key pair file name and EC2 instance public IP address.
 
 2. **Install and Configure Node.js**:
 
@@ -146,24 +147,179 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      ```bash
      npm init -y
      npm install express
+     npm install nodemailer
      ```
+     
+   - Generate app-specific password:
+**For Gmail:**
 
+Enable 2-Step Verification in Google Account
+
+Generate App Password: Google Account → Security → App passwords
+
+Update the Gmail configuration in emailProviders.gmail
+
+**For Yahoo:**
+
+Enable two-step verification
+
+Generate App Password: Account Security → Generate app password
+
+Update the Yahoo configuration in emailProviders.yahoo
+
+   - Select your provider and change `SELECTED_PROVIDER` in the code below to 'yahoo' if it is not gmail
+     
    - Create a server script:
 
      ```bash
      cat << 'EOF' > app.js¨
      const express = require('express');
+     const path = require('path');
+     const nodemailer = require('nodemailer');
      const app = express();
-     const port = 80;
+     const port = 50;
+
+     // Email provider configurations
+     const emailProviders = {
+         gmail: {
+             service: 'gmail',
+             host: 'smtp.gmail.com',
+             port: 587,
+             secure: false,
+             requiresAppPassword: true,
+             auth: {
+                 user: 'your-email@gmail.com',
+                 pass: 'your-gmail-app-password'
+             }
+         },
+         yahoo: {
+             service: 'yahoo',
+             host: 'smtp.mail.yahoo.com',
+             port: 465,
+             secure: true,
+             requiresAppPassword: true,
+             auth: {
+                 user: 'your-email@yahoo.com',
+                 pass: 'your-yahoo-app-password'
+             }
+         }
+     };
+
+     // Select your email provider here: 'gmail' or 'yahoo'
+     const SELECTED_PROVIDER = 'gmail';  // Change this to 'yahoo' for Yahoo Mail
+
+     // Create email configuration
+     const getEmailConfig = (provider) => {
+         const config = emailProviders[provider];
+         if (!config) {
+             throw new Error(`Unsupported email provider: ${provider}`);
+         }
+         return {
+             service: config.service,
+             host: config.host,
+             port: config.port,
+             secure: config.secure,
+             auth: config.auth,
+             debug: false,
+             logger: true
+         };
+     };
+
+     // Validate email configuration
+     const validateEmailConfig = (config) => {
+         const { auth } = config;
+         if (!auth.user || !auth.pass) {
+             throw new Error('Email configuration is incomplete. Please check your email and password settings.');
+         }
+         return true;
+     };
+
+     // Initialize email transporter
+     let transporter;
+     try {
+         const emailConfig = getEmailConfig(SELECTED_PROVIDER);
+         validateEmailConfig(emailConfig);
+         transporter = nodemailer.createTransport(emailConfig);
+     } catch (error) {
+         console.error('Email configuration error:', error.message);
+         process.exit(1);
+     }
 
      app.use(express.static('public'));
+     app.use(express.json());
 
-     app.get('/api/greet', (req, res) => {
-         res.json({ message: 'Hello, welcome to your interactive web app!' });
+     // Test email configuration on startup
+     transporter.verify((error, success) => {
+         if (error) {
+             console.error('Email configuration verification failed:', error);
+         } else {
+             console.log('Email server is ready to send messages');
+         }
+     });
+
+     app.get('/', (req, res) => {
+         res.sendFile(path.join(__dirname, 'public', 'index.html'));
+     });
+
+     app.post('/submit', async (req, res) => {
+         const { name, email } = req.body;
+    
+    // Email content
+    const mailOptions = {
+        from: emailProviders[SELECTED_PROVIDER].auth.user,
+        to: emailProviders[SELECTED_PROVIDER].auth.user,
+        subject: 'New Contact Form Submission',
+        html: `
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p>Received on: ${new Date().toLocaleString()}</p>
+        `
+    };
+
+    try {
+        // Send email
+        await transporter.sendMail(mailOptions);
+        
+        // Send auto-response to the user
+        const autoReplyOptions = {
+            from: emailProviders[SELECTED_PROVIDER].auth.user,
+            to: email,
+            subject: 'Thank you for contacting us',
+            html: `
+                <h3>Thank you for reaching out, ${name}!</h3>
+                <p>We have received your submission and will get back to you shortly.</p>
+                <p>Best regards!!</p>
+            `
+        };
+        
+        await transporter.sendMail(autoReplyOptions);
+
+        res.json({ 
+            message: `Thank you ${name}! We'll contact you at ${email}`,
+            success: true 
+        });
+    } catch (error) {
+        console.error('Email sending error:', error);
+        res.status(500).json({ 
+            message: 'There was an error processing your request',
+            success: false 
+        });
+    }
+     });
+
+     // Error handling middleware
+     app.use((error, req, res, next) => {
+         console.error('Server error:', error);
+         res.status(500).json({
+             message: 'An unexpected error occurred',
+             success: false
+         });
      });
 
      app.listen(port, () => {
-         console.log(`App running at http://localhost:${port}`);
+         console.log(`Server running at http://localhost:${port}`);
+         console.log(`Using email provider: ${SELECTED_PROVIDER}`);
      });
      EOF
      ```
@@ -186,28 +342,164 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
 
    - Add an HTML file for interactivity:
 
-     ```bash
-     cat << 'EOF' > public/index.html
-     <!DOCTYPE html>
-     <html>
-     <head>
-         <title>Interactive Web App</title>
-         <script>
-             async function fetchGreeting() {
-                 const response = await fetch('/api/greet');
-                 const data = await response.json();
-                 document.getElementById('greeting').innerText = data.message;
-             }
-         </script>
-     </head>
-     <body>
-         <h1>Welcome to My Web App!</h1>
-         <button onclick="fetchGreeting()">Get Greeting</button>
-         <p id="greeting"></p>
-     </body>
-     </html>
-     EOF
-     ```
+```bash
+cat << 'EOF' > public/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our AWS Server</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Cloud Platform</h1>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>Scalable</h3>
+                <p>Built on AWS infrastructure for maximum reliability</p>
+            </div>
+            <div class="feature">
+                <h3>Secure</h3>
+                <p>Enterprise-grade security features included</p>
+            </div>
+            <div class="feature">
+                <h3>Fast</h3>
+                <p>Optimized for performance worldwide</p>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Get Started</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <button type="submit">Contact Us</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: $('#name').val(),
+                    email: $('#email').val()
+                };
+
+                $.ajax({
+                    url: '/submit',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        $('#message').html(response.message)
+                            .addClass('success')
+                            .show();
+                        $('#contactForm')[0].reset();
+                    },
+                    error: function() {
+                        $('#message').html('An error occurred. Please try again.')
+                            .removeClass('success')
+                            .show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+EOF
+```
      
 **Press ENTER after pasting the script above and ensure the command return to the terminal prompt without errors. If command doesn't return to terminal prompt, type Control + D (^D) to indicate end of file.**
 
