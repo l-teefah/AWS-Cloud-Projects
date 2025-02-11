@@ -151,6 +151,7 @@ This section explains the process of creating a Virtual Private Cloud (VPC) and 
      ```
      
    - Generate app-specific password:
+We will be generating an app-specific password as this is more secure and and different from the regular email password. Also, a new password can be generated if you lose the password.
      
    1. **For Gmail:**
 
