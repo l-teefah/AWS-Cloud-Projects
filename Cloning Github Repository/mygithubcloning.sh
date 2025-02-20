@@ -16,10 +16,10 @@ cd /var/www/html
 mkdir ~/website && cd ~/website
 
 # Clone the provided GitHub repository into the 'website' directory
-git clone https://github.com/ummatamanna/summerschoolexercise03.git
-
+git clone https://github.com/l-teefah/AWS-Cloud-Computing-Classes.git
+  
 # Navigate into the cloned repository directory
-cd summerschoolexercise03
+ cd AWS-Cloud-Computing-Classes
 
 # Move all files from the cloned repository to the Apache web directory for hosting
 sudo mv * /var/www/html/
