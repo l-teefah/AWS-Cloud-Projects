@@ -5,9 +5,9 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 ## Table of Contents
 
 ### **Notes & Quizzes**
-- [AWS Notes](./Notes & Quizzes/General_Notes.pdf)
-- [AWS Scenario Questions](./Notes & Quizzes/Assessment_Scenario_Certification.pdf)
-- [AWS SysOps Quiz](./Notes & Quizzes/AWS_SysOps_Q&A_Guide.docx)
+- [AWS Notes](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Notes%20%26%20Quizzes/General_Notes.pdf)
+- [AWS Scenario Questions](https://github.com/l-teefah/AWS-Cloud-Projects/blob/main/Notes%20%26%20Quizzes/Assessment_Scenario_Certification.pdf)
+- [AWS SysOps Quiz](https://github.com/l-teefah/AWS-Cloud-Projects/blob/main/Notes%20%26%20Quizzes/AWS_SysOps_Q%26A_Guide.docx)
 
 
 ### **EC2 and Compute Resources**
