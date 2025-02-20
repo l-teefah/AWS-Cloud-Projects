@@ -62,7 +62,7 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 1. **Clone the repository:**
    
    ```sh
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/l-teefah/AWS-Cloud-Projects
    ```
    
 2. **Navigate to the relevant guide:**  
