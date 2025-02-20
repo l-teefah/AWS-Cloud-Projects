@@ -26,11 +26,13 @@ Below is a step-by-step guide to deploying a website on an AWS EC2 instance:
    - Ensure ports 22 (SSH) and 80 (HTTP) are open in the security group.
 
 2. **Update the System**
+   
    ```bash
    sudo yum update -y
    ```
 
 3. **Install Required Packages**
+   
    ```bash
    sudo yum install git -y
    sudo yum install httpd -y
@@ -38,13 +40,15 @@ Below is a step-by-step guide to deploying a website on an AWS EC2 instance:
 
 4. **Clone the Repository**
    Navigate to the desired directory and clone the GitHub repository:
+   
    ```bash
-   git clone https://github.com/ummatamanna/summerschoolexercise03.git
-   cd summerschoolexercise03
+   git clone https://github.com/l-teefah/AWS-Cloud-Computing-Classes.git
+   cd AWS-Cloud-Computing-Classes
    ```
 
 5. **Deploy the Website**
    Move the website files to the Apache root directory:
+   
    ```bash
    sudo mv * /var/www/html/
    sudo systemctl restart httpd
@@ -66,13 +70,9 @@ Below is a step-by-step guide to deploying a website on an AWS EC2 instance:
 ---
 
 **How to Use This Repository**
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/l-teefah/AWS-Cloud-Computing-Classes.git
-   cd AWS-Cloud-Computing-Classes
-   ```
 
-2. Use the `process.sh` script to automate the deployment:
+Use the `process.sh` script to automate the deployment:
+
    ```bash
    chmod +x mygithubcloning.sh
    ./mygithubcloning.sh
