@@ -11,7 +11,7 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 
 
 ### **EC2 and Compute Resources**
-- [Basics of how EC2 instances work](Introduction_to_Amazon_EC2_README.md)
+- [Basics of how EC2 instances work](https://github.com/l-teefah/AWS-Cloud-Projects/blob/main/Create_EC2_Instances_README.md)
 - [Install & configure AWS CLI. Create an EC2 Instance using AWS CLI](Install_Configure_AWS_CLI_README.md)
 - [Launch Instance and retrieve its details using AWS CLI](Create_EC2_Instances_README.md)
 - [Create VPC, Subnet, IGW, Route Table, and EC2 Instance in AWS Console with Bastion Server](Create_EC2_Instances_CLI_BastionServer_README.md)
@@ -27,16 +27,16 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 - [Amazon EBS Volume & Storage Management with AWS CLI](Amazon_EBS_and_Storage_Guide.md)
 - [Build a Database Server](Build_DB_Server_README.md)
 - [Migrating to Amazon RDS From MariaDB Database](Migrating_to_Amazon_RDS.md)
-- [AWS Relational Database Operations](AWS_Relational_Database_Operations_README.md)
-- [AWS Aurora & DynamoDB](aws_aurora_dynamodb_setup.md)
+- [AWS Relational Database Operations](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/AWS%20Relational%20Database%20Operations%20with%20SQL)
+- [AWS Aurora & DynamoDB](aws_aurora_dynamo_setup.md)
 
 ### **Website Hosting and Scaling**
-- [Host a website on EC2 instance and set up failover routing with Route 53](Sewing_Website_Route53_Failover_README.md)
-- [Hosting S3 bucket static website via AWS Console, Instance Connect, or SSH](Create_S3_Website_README.md)
+- [Host a website on EC2 instance and set up failover routing with Route 53](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Sewing%20Website%20Route%20Failover)
+- [Hosting S3 bucket static website via AWS Console, Instance Connect, or SSH](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Create%20S3%20Static%20Website)
 - [Scaling and Load Balancing AWS Architecture](Scaling_and_Load_Balancing_README.md)
 
 ### **AWS CLI and CloudFormation**
-- [Creating AWS Resources through CloudFormation](Lateefah_CloudFormation_Template_README.md)
+- [Creating AWS Resources through CloudFormation](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/CloudFormation%20Template)
 - [Managing Resources with Tagging in AWS CLI](AWS_tag_README.md)
 
 ### **Automation & Monitoring**
@@ -44,17 +44,17 @@ Welcome to the **AWS Cloud Projects Repository**! This repository contains hands
 - [AWS CloudWatch Alarm activated by SNS](AWS_cloudwatch_README.md)
 
 ### **AWS Lambda Projects**
-- [AWS Lambda Character Count Function](AWS_Character_Count_Lambda_README.md)
-- [Student Attendance Tracker Based on Schedule Using AWS Lambda](Student_Attendance_Tracker_README.md)
+- [AWS Lambda Character Count Function](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/AWS%20Lambda%20Character%20Count%20Function)
+- [Student Attendance Tracker Based on Schedule Using AWS Lambda](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Student%20Attendance%20Tracker)
 
 ### **Linux and DevOps Essentials**
 - [Linux Command Line, Editing Files in Vim & nano, Working with Commands](Linux_Command_Line_README.md)
 - [Creating directories, users and groups, transferring files, adding permissions, and managing cron jobs](AWS_User_Groups_Directory_Guide.md)
-- [Cloning Github Repository](README.MD)
+- [Cloning Github Repository](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Cloning%20Github%20Repository)
 
 ### **Networking and Troubleshooting**
-- [Troubleshooting VPC](Troubleshooting_VPC_README.md)
-- [Creating a Web Server App with VPC](VPC_web_server.Rmd)
+- [Troubleshooting VPC](https://github.com/l-teefah/AWS-Cloud-Projects/tree/main/Troubleshooting%20VPC)
+- [Creating a Web Server App with VPC](https://github.com/l-teefah/AWS-Cloud-Projects/blob/main/VPC_web_server.md)
 
 ---
 
