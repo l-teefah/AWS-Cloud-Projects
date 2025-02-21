@@ -84,9 +84,3 @@ Use the `process.sh` script to automate the deployment:
 If you’d like to contribute, feel free to e-mail me, submit a pull request or raise an issue.
 
 ---
-
-**Author**
-**Name**: Lateefah Yusuf
-**GitHub**: https://github.com/l-teefah
-
----
