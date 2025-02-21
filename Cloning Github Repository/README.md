@@ -1,4 +1,4 @@
-**AWS Cloud Computing: Deployment Process**
+**Github Cloning Deployment Process on AWS**
 
 This repository documents the process of deploying a website on an AWS EC2 instance, including cloning an existing repository, configuring the environment, and hosting the application using Apache. 
 
