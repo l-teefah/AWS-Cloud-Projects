@@ -1,4 +1,4 @@
-# Creating Amazon EC2 Instances
+# Creating Amazon EC2 Resources
 
 ## Overview
 
